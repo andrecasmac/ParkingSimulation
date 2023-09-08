@@ -188,7 +188,8 @@ for i in range(110):
 # Creamos la simulacion con todos los vehiculos
 # El vehicle rate nos ayuda a aumentar o disminuir la separacion de los carros
 sim.create_gen({
-    'vehicle_rate': 300,
+    # Se recomienda 100, maximo 300
+    'vehicle_rate': 100,
     'vehicles': vehiculos
 })
 
