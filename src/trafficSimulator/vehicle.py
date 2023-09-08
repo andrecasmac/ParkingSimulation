@@ -27,6 +27,7 @@ class Vehicle:
         self.v = self.v_max
         self.a = 0
         self.stopped = False
+        self.color = list(np.random.choice(range(160), size=3))
 
     def init_properties(self):
         self.sqrt_ab = 2*np.sqrt(self.a_max*self.b_max)

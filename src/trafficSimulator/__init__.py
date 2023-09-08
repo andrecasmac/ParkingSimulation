@@ -162,7 +162,7 @@ for i in range(618):
 # El vehicle rate nos ayuda a aumentar o disminuir la separacion de los carros
 sim.create_gen({
     # Se recomienda 100, maximo 300
-    'vehicle_rate': 200,
+    'vehicle_rate': 150,
     'vehicles': vehiculos
 })
 
@@ -170,4 +170,4 @@ sim.create_gen({
 # Start simulation
 win = Window(sim)
 win.offset = (0, 0)
-win.run(steps_per_update=3)
+win.run(steps_per_update=20)
