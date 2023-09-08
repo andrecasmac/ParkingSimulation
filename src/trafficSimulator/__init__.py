@@ -24,9 +24,8 @@ parking_width = 4
 parking_depth = 8
 
 roads = []
-
-
 road_number = 0
+
 # (0, 9) : 0
 road_id = {}
 # 15 : (1, 2)
