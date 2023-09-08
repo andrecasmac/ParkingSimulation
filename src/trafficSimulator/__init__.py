@@ -146,13 +146,13 @@ for row_pos, row in enumerate(parking_map):
                 roads.append(((x, y), (x, y-parking_depth), 1))
             # Apuntando al Este
             elif road > 2000 and road < 3000:
-                roads.append(((x+2, y-2), (x-parking_depth+2, y-2), 1))
+                roads.append(((x-2, y-2), (x+parking_depth-2, y-2), 1))
             # Apuntando al Sur
             elif road > 3000 and road < 4000:
                 roads.append(((x, y-parking_width), (x, y+parking_width), 1))
             # Apuntando al Oeste
             else:
-                roads.append(((x-2, y-2), (x+parking_depth-2, y-2), 1))
+                roads.append(((x+2, y-2), (x-parking_depth+2, y-2), 1))
         # Calle
         else:
             # Norte
@@ -172,23 +172,25 @@ sim.create_roads(roads)
 
 vehiculos = []
 
-for i in range(110):
+""" for i in range(110):
     sim.create_gen({
     'vehicle_rate': 1,
     'vehicles': [
         [i+1, {"path": bfs(road_id, parking_map, 17, 25, parking_id[i+1], parking_position)}]
         ]   
-    })
+    }) """
 
-#sim.create_signal([[13, 17], [11, 15]])
+for i in range(110):
+    # Se agrega la ruta de cada carro, dandole un peso de 1, para que todos tengan el mismo peso
+    # Y partiendo de la posicion 17, 25
+    vehiculos.append([1, {"path": bfs(road_id, parking_map, 17, 25, parking_id[i+1], parking_position)}])
 
-# for i in range(50):
-#     vehiculos.append([i+1, {"path": bfs(road_id, parking_map, 0, 0, parking_id[i+1], parking_position)}])
-
-# sim.create_gen({
-#     'vehicle_rate': 1,
-#     'vehicles': vehiculos
-# })
+# Creamos la simulacion con todos los vehiculos
+# El vehicle rate nos ayuda a aumentar o disminuir la separacion de los carros
+sim.create_gen({
+    'vehicle_rate': 300,
+    'vehicles': vehiculos
+})
 
 
 # Start simulation

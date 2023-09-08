@@ -6,6 +6,7 @@ class VehicleGenerator:
         self.sim = sim
         self.destinations = set()
         self.next_vehicle = 0
+        self.vehicle_counter = 0
 
         # Set default configurations
         self.set_default_config()
@@ -30,24 +31,22 @@ class VehicleGenerator:
 
     def generate_vehicle(self):
         """Returns a random vehicle from self.vehicles with random proportions"""
-        # total = sum(pair[0] for pair in self.vehicles)
-        # r = randint(1, total+1)
-        for (weight, config) in self.vehicles:
-        #     r -= weight
-        #     if r <= 0:
-            return Vehicle(config)
-        # (weight, config) = self.vehicles[self.next_vehicle]
-        # print(self.vehicles)
-        # self.next_vehicle += 1
-        # return Vehicle(config)
+        # Se regresa el carro de la posicion vehicle_counter
+        vehicle = self.vehicles[self.vehicle_counter]
+        weight, config = vehicle
+
+        self.vehicle_counter += 1
+        return Vehicle(config)
 
     def update(self):
         """Add vehicles"""
         roadF = self.sim.roads[self.upcoming_vehicle.path[-1]]
-        if(roadF.tipo == 1 and self.upcoming_vehicle.path[-1] in self.destinations):
+        # Se revisa si el destinto es un estacionamiento libre
+        # Y que todavia alla estacionamientos restantes
+        if(roadF.tipo == 1 and self.upcoming_vehicle.path[-1] in self.destinations or self.vehicle_counter >= len(self.vehicles)):
             return
         
-        if self.sim.t - self.last_added_time >= 1:
+        if self.sim.t - self.last_added_time >= 100 / self.vehicle_rate:
             # If time elasped after last added vehicle is
             # greater than vehicle_period; generate a vehicle
             road = self.sim.roads[self.upcoming_vehicle.path[0]]
