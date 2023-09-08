@@ -153,7 +153,7 @@ sim.create_roads(roads)
 
 vehiculos = []
 
-for i in range(617):
+for i in range(618):
     # Se agrega la ruta de cada carro, dandole un peso de 1, para que todos tengan el mismo peso
     # Y partiendo de la posicion 17, 25
     vehiculos.append([1, {"path": bfs(road_id, parking_map, 79, 40, parking_id[i+1], parking_position)}])
